@@ -40,6 +40,18 @@ def ej1():
     # Colocar la leyenda y el label con el nombre de la función
     # Darle color a la línea a su elección
 
+    fig = plt.figure()
+     
+    ax = fig.add_subplot()
+    ax.plot(x,y, color='r')
+    ax.set_facecolor('lightgray')
+    ax.set_title("Cuadrados de 'x'")
+    ax.set_ylabel("Potencia cuadrada")
+    ax.set_xlabel(["Valores de x"])
+
+    plt.show()
+    
+
 
 def ej2():
     # Line Plot
@@ -65,6 +77,21 @@ def ej2():
     # Cada función dibujarla con un color distinto
     # a su elección
 
+    fig = plt.figure()
+    fig.suptitle('Gráfico comparativo entre una función cuadrática y una cúbica usando igual valores para "x".', fontsize=14)
+
+    ax = fig.add_subplot()
+    
+    ax.plot(x, y1, color='g', marker='.', label='Gráfico de una función cuadrada')
+    ax.plot(x, y2, color='r', label='Gráfico de una función cúbica')
+    ax.set_facecolor('lavender')
+    ax.set_title('Gráfico de una función cuadrática')
+    ax.set_xlabel('Valores de x')
+    ax.set_ylabel('Valores de y')
+    ax.legend()
+       
+    plt.show()
+
 
 def ej3():
     # Scatter Plot
@@ -84,6 +111,17 @@ def ej3():
     # cada gráfico
 
     # Elegir un marker a elección
+
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    
+    ax.scatter(x, y, c='green', label='y = tanh(x)')
+    ax.set_facecolor('mintcream')
+    ax.set_title('Gráfico de la función tangente')
+    ax.set_xlabel('Valor de x')
+    ax.set_ylabel('Valores resultantes de tanh(x)')
+
+    plt.show()
 
 
 def ej4():
@@ -123,11 +161,47 @@ def ej4():
 
     # Colocar una grilla a elección
 
+    fig = plt.figure()
+    
+    ax1 = fig.add_subplot(3, 2, 1) #LO HICE ASÍ PARA QUE LOS TÍTULOS DE LOS GRÁFICOS DE LA SEGUNDA FILA
+    ax2 = fig.add_subplot(3, 2, 2) #NO ESTUVIERAN SOBRESCRITOS 
+    ax3 = fig.add_subplot(3, 2, 5)
+    ax4 = fig.add_subplot(3, 2, 6)
+
+
+    ax1.plot(x, y1, color='green', label='y=x**2')
+    ax1.set_facecolor('lavender')
+    ax1.set_title('Parábola')
+    ax1.set_xlabel('Valores de x')
+    ax1.set_ylabel('Potencia cuadrada de x')
+    ax1.legend()
+    
+    ax2.plot(x, y2, color='red', label='y=x**3')
+    ax2.set_facecolor('mintcream')
+    ax2.set_title('Gráfico de una función cúbica')
+    ax2.set_xlabel('Valores de x')
+    ax2.set_ylabel('Potencia cúbica de x')
+    ax2.legend()
+    
+    ax3.plot(x, y3, color='blue', label='y=x**4')
+    ax3.set_facecolor('papayawhip')
+    ax3.set_title('Gráfico de una función polinómica de cuarto grado')
+    ax3.set_xlabel('Valores de x')
+    ax3.set_ylabel('potencia cuarta de x')
+    ax3.legend()
+
+    ax4.plot(x, y4, color='purple', label='y=raiz de "x"')
+    ax4.set_facecolor('lightgrey')
+    ax4.set_title('Gráfico de una función raiz cuadrada')
+    ax4.set_xlabel('Valores de x')
+    ax4.set_ylabel('Raíz cuadrada de x')
+    ax4.legend()
+
+    plt.show()
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
-    ej1()
-    # ej2()
-    # ej2()
-    # ej3()
-    # ej4()
+    #ej1()
+    #ej2()
+    #ej3()
+    ej4()

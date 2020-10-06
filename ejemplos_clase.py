@@ -186,7 +186,7 @@ def line_plot():
     custom_ticks = np.linspace(0, 10, 11, dtype=int)
     ax.set_xticks(custom_ticks)
     ax.set_facecolor('whitesmoke')
-    plt.plot(block=False)
+    plt.show(block=False)
 
     # Demostracion de line plot junto con grid layout
     gs = gridspec.GridSpec(2, 2)     # (row, col)
@@ -481,12 +481,12 @@ if __name__ == '__main__':
     # simple_plot()
     # multi_plot()
     # marker_color()
-    # grid()
+    #grid()
     # ---------------- Tipos de gráficos ---------------- #
-    line_plot()
-    scatter_plot()
-    bar_plot()
+    # line_plot()
+    # scatter_plot()
+    #bar_plot()
     pie_plot()
-    # --------------------------------------------------- #
-    cursores()
-    file_plot()
+    # # --------------------------------------------------- #
+    # cursores()
+    # file_plot()

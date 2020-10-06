@@ -42,7 +42,7 @@ def ej1():
     # ------
     # graf1
     # ------
-    # graf2
+    # graf2    
     # ------
     # graf3
     # ------
@@ -54,6 +54,35 @@ def ej1():
 
     # Cada gráfico realizarlo con un color distinto
     # a su elección
+
+    y1 = [i ** 2 for i in x]
+    y2 = [i ** 3 for i in x]
+    y3 = [i ** 4 for i in x]
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(3, 1, 1)
+    ax2 = fig.add_subplot(3, 1, 2)
+    ax3 = fig.add_subplot(3, 1, 3)
+
+    ax1.plot(x, y1, color='black', label='y=x**2')
+    ax1.set_facecolor('lavender')
+    ax1.set_xlabel('Valores de x')
+    ax1.set_ylabel('Potencia cuadrada de x')
+    ax1.legend()
+    
+    ax2.plot(x, y2, color='red', label='y=x**3')
+    ax2.set_facecolor('mintcream')
+    ax2.set_xlabel('Valores de x')
+    ax2.set_ylabel('Potencia cúbica de x')
+    ax2.legend()
+    
+    ax3.plot(x, y3, color='green', label='y=x**4')
+    ax3.set_facecolor('papayawhip')
+    ax3.set_xlabel('Valores de x')
+    ax3.set_ylabel('potencia cuarta de x')
+    ax3.legend()
+
+    plt.show()
 
 
 def ej2():
@@ -83,6 +112,29 @@ def ej2():
     # Cada gráfico realizarlo con un mark distinto
     # a su elección.
 
+    y1 = np.sin(x)
+    y2 = np.cos(x)
+
+    fig = plt.figure()
+
+    ax1 = fig.add_subplot(1, 2, 1)
+    ax2 = fig.add_subplot(1, 2, 2)
+
+    ax1.plot(x, y1, color='black', label='y=sin(x)',  marker='.')
+    ax1.set_title('sin(x)')
+    ax1.set_facecolor('bisque')
+    ax1.set_xlabel('Valores de x')
+    ax1.set_ylabel('Valores de y')
+    ax1.legend()
+
+    ax2.plot(x, y1, color='red', label='y=cos(x)', marker='^')
+    ax2.set_title('cos(x)')
+    ax2.set_facecolor('lightgrey')
+    ax2.set_xlabel('Valores de x')
+    ax2.set_ylabel('Valores de y')
+    ax2.legend()
+
+    plt.show()
 
 def ej3():
     # Bar Plot
@@ -99,6 +151,18 @@ def ej3():
     # Se debe colocar título al gráfico.
     # Se debe cambiar la grilla y el fondo a su elección.
 
+    fig = plt.figure()
+    fig.suptitle('"Uso de los lenguajes de programación"', fontsize=16)
+    ax = fig.add_subplot()
+   
+    ax.bar(lenguajes, performance, label='Lenguajes')
+    ax.set_facecolor('lightyellow')
+    ax.grid(ls='dashed')
+    ax.set_xlabel('Lenguajes de programación')
+    ax.set_ylabel('Uso de cada lenguaje')
+    ax.legend()
+
+    plt.show()
 
 def ej4():
     # Pie Plot
@@ -116,6 +180,19 @@ def ej4():
     # Se desea mostrar en el gráfico los porcentajes de c/u
     # Se debe colocar un título al gráfico
 
+    
+    fig = plt.figure()
+    fig.suptitle('"Uso de los lenguajes de programación"', fontsize=16)
+    ax = fig.add_subplot()
+
+    explode = (0.1, 0, 0, 0, 0, 0, 0)
+
+    ax.pie(uso_lenguajes.values(), labels=uso_lenguajes.keys(), explode=explode, autopct='%1.1f%%', shadow=True, startangle=90)
+    ax.axis('equal')
+
+    plt.show()
+
+
 
 def ej5():
     # Uso de múltiples líneas en un mismo gráfico (axes)
@@ -130,11 +207,20 @@ def ej5():
     # Se pide usar comprensión de listas para generar las dos listas
     # por separado de los valoresde "X" e "Y" para poder utilizar
     # el line plot y observar la señal
-
-    # signal_x = [....]
-    # signal_y = [....]
-
-    # plot(signal_x, signal_y)
+   
+    signal_x = [data['X'] for data in signal]
+    signal_y = [data['Y'] for data in signal]
+ 
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.plot(signal_x, signal_y, c='red')
+    ax.set_title('"Señal senoidal"')
+    ax.set_facecolor('mintcream')
+    ax.set_xlabel('Eje x')
+    ax.set_ylabel('Eje y')
+    ax.grid()
+    
+    plt.show(block=False)
 
     # Ahora que han visto la señal senoidal en su gráfico, se desea
     # que generen otras dos listas de "X" e "Y" pero filtradas por
@@ -142,23 +228,45 @@ def ej5():
     # con aquellos valores de "Y" cuyo valor absoluto (abs)
     # supere 0.7
 
-    # filter_signal_x = [....]
-    # filter_signal_y = [....]
+    filter_signal_x = [data['X'] for data in signal if abs(data['Y']) > 0.7]
+    filter_signal_y = [data['Y'] for data in signal if abs(data['Y']) > 0.7]
 
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.scatter(filter_signal_x, filter_signal_y, c='blue')
+    ax.set_title('"Señal senoidal filtrada"')
+    ax.set_facecolor('mintcream')
+    ax.set_xlabel('Eje x')
+    ax.set_ylabel('Eje y')
+    ax.grid()
+    
+    plt.show(block=False)
     # Graficar juntas ambos conjuntos de listas y observar
     # el resultado. Graficar filter como scatter plot
 
     # plot(signal_x, signal_y)
     # scatter(filter_signal_x, filter_signal_y)
 
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.plot(signal_x, signal_y, color='red', label='signal')
+    ax.scatter(filter_signal_x, filter_signal_y, color='blue', label='filter_signal')
+    ax.set_title('"Señal senoidal"')
+    ax.set_facecolor('mintcream')
+    ax.set_xlabel('Eje x')
+    ax.set_ylabel('Eje y')
+    ax.grid()
+    ax.legend()
+    plt.show()
+
     # Pueden ver el concepto y la utilidad de
     # realizar un gráfico encima de otro para filtrar datos?
-
+    #ES DE UTILIDAD PARA COMPARAR DATOS Y PODER VISUALIZAR LAS DIFERENCIAS.
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
-    ej1()
-    # ej2()
-    # ej3()
-    # ej4()
-    # ej5()
+    #ej1()
+    #ej2()
+    #ej3()
+    #ej4()
+    ej5()

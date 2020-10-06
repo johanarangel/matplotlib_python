@@ -16,6 +16,13 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.2"
 
 
+import csv
+import matplotlib.pyplot as plt
+import matplotlib.axes
+import matplotlib.gridspec as gridspec
+import mplcursors
+import numpy as np
+
 '''
 NOTA PARA TODOS LOS EJERCICIOS
 
@@ -50,7 +57,7 @@ def ej1():
     print('Comenzamos a divertirnos!')
 
     '''
-    Para comenzar a calentar en el uso del dataset se lo solicita
+    Para comenzar a calentar en el uso del dataset se le solicita
     que grafique la evolución de la facturación de la categoría alimentos
     para el primer mes (mes 1) de facturación.
     Realice un line plot con los datos de facturación de alimentos del mes 1
@@ -59,7 +66,7 @@ def ej1():
     TIP:
     1) Para aquellos que utilicen listas siempre primero deberan
     emprezar filtrando el dataset en una lista de diccionarios que
-    posee solo las filas y columnas que a están buscando.
+    posee solo las filas y columnas que están buscando.
     En este caso todas las filas cuyo mes = 1 y solo la columan
     de día(x) y de alimentos(y).
     Una vez que tiene esa lista de dccionarios reducida a la información
@@ -93,8 +100,30 @@ def ej1():
     y = mes_1[:, 2]
 
     '''
+    #lista_dias =[]
+    with open('ventas.csv') as csvfile:
+        data = list(csv.DictReader(csvfile))
+    
+    x_dia = [int(data[i].get('Dia')) for i in range(len(data)) if int(data[i].get('Mes')) == 1]
 
+    y_alimentos = [int(data[i].get('Alimentos')) for i in range(len(data)) if int(data[i].get('Mes')) == 1]
 
+    fig = plt.figure()
+    ax = fig.add_subplot()
+
+    ax.plot(x_dia, y_alimentos, color='red', label='Evolución alimentos')
+    ax.set_title('"Evolución de la facturación de alimentos en el primer mes"')
+    ax.set_facecolor('lightgrey')
+    ax.set_xlabel('Días')
+    ax.set_ylabel('Alimentos')
+    ax.grid()
+    mplcursors.cursor(multiple=False)
+    ax.legend()
+
+    plt.show()
+
+    csvfile.close()
+    
 def ej2():
     print('Comenzamos a ponernos serios!')
 
@@ -121,8 +150,27 @@ def ej2():
     plot(tendencia)
 
     '''
+    with open('ventas.csv') as csvfile:
+        data = list(csv.DictReader(csvfile))
 
+    y_alimentos = [int(data[i].get('Alimentos')) for i in range(len(data))]
 
+    tendencia = np.diff(y_alimentos)
+
+    fig = plt.figure()
+    ax = fig.add_subplot()
+
+    ax.plot(tendencia, color='blue', label='Tendencia')
+    ax.set_title('"Tendencia de venta de los alimentos a lo largo de todo el año"')
+    ax.set_facecolor('lightyellow')
+    ax.set_ylabel('Tendencia')
+    ax.grid()
+    mplcursors.cursor(multiple=False)
+    ax.legend()
+
+    plt.show()
+    csvfile.close()
+  
 def ej3():
     print("Buscando la tendencia")
 
@@ -137,6 +185,27 @@ def ej3():
     ventas de electrodomésticos.
 
     '''
+
+    with open('ventas.csv') as csvfile:
+        data = list(csv.DictReader(csvfile))
+    
+    electrodomesticos = [int(data[i].get('Electrodomesticos')) for i in range(len(data))]
+
+    filter_electrod = [x if x == 0 else 1 for x in electrodomesticos]
+
+    fig = plt.figure()
+    ax = fig.add_subplot()
+
+    ax.plot(filter_electrod, color='blue', label='Tendencia de ventas de electrodomésticos')
+    ax.set_title('"Venta de electrodomesticos"')
+    ax.set_facecolor('lightblue')
+    ax.set_ylabel('Tendencia')
+    ax.grid()
+    ax.legend()
+
+    plt.show()
+
+    csvfile.close()
 
 
 def ej4():
@@ -160,6 +229,34 @@ def ej4():
     del año
     '''
 
+    with open('ventas.csv') as csvfile:
+        data = list(csv.DictReader(csvfile))
+    
+    electrodomesticos = [int(data[i].get('Electrodomesticos')) for i in range(len(data))]
+    
+    alimentos = [int(data[i].get('Alimentos')) for i in range(len(data))]
+    
+    bazar = [int(data[i].get('Bazar')) for i in range(len(data))]
+
+    limpieza = [int(data[i].get('Limpieza')) for i in range(len(data))]
+    
+    suma ={'Electrodomesticos': sum(electrodomesticos), 'Alimentos': sum(alimentos), 'Bazar': sum(bazar), 'Limpieza': sum(limpieza)}
+
+    print(suma)
+
+    fig = plt.figure('Facturación')
+    fig.suptitle('"Facturación total"', fontsize=16)
+    ax = fig.add_subplot()
+
+    explode = (0.1, 0, 0, 0)
+
+    ax.pie(suma.values(), labels= suma.keys(), explode=explode, autopct='%1.1f%%', shadow=True, startangle=90)
+    ax.axis('equal')
+
+    plt.show()
+    csvfile.close()
+
+    
 
 def ej5():
     print("Ahora sí! buena suerte :)")
@@ -183,12 +280,69 @@ def ej5():
     realicen uno solo y agrupen la información utilizando gráfico de barras
     apilados o agrupados (a su elección)
     '''
+    
+    with open('ventas.csv') as csvfile:
+        data = list(csv.DictReader(csvfile))
+    
+    #-----------------LISTA PRIMER MES-------------------
+    
+    electrodomesticos = [int(data[i].get('Electrodomesticos')) for i in range(len(data)) if int(data[i].get('Mes')) == 1]
+        
+    alimentos = [int(data[i].get('Alimentos')) for i in range(len(data)) if int(data[i].get('Mes')) == 1]
+        
+    bazar = [int(data[i].get('Bazar')) for i in range(len(data)) if int(data[i].get('Mes')) == 1]
+
+    limpieza = [int(data[i].get('Limpieza')) for i in range(len(data)) if int(data[i].get('Mes')) == 1]
+    
+    #-----------------LISTA SEGUNDO MES-------------------
+    
+    electrodomesticos2 = [int(data[i].get('Electrodomesticos')) for i in range(len(data)) if int(data[i].get('Mes')) == 2]
+        
+    alimentos2 = [int(data[i].get('Alimentos')) for i in range(len(data)) if int(data[i].get('Mes')) == 2]
+        
+    bazar2 = [int(data[i].get('Bazar')) for i in range(len(data)) if int(data[i].get('Mes')) == 2]
+
+    limpieza2 = [int(data[i].get('Limpieza')) for i in range(len(data)) if int(data[i].get('Mes')) == 2]
+        
+    #----------------- LISTA TERCER MES-------------------
+
+    electrodomesticos3 = [int(data[i].get('Electrodomesticos')) for i in range(len(data)) if int(data[i].get('Mes')) == 3]
+        
+    alimentos3 = [int(data[i].get('Alimentos')) for i in range(len(data)) if int(data[i].get('Mes')) == 3]
+        
+    bazar3 = [int(data[i].get('Bazar')) for i in range(len(data)) if int(data[i].get('Mes')) == 3]
+
+    limpieza3 = [int(data[i].get('Limpieza')) for i in range(len(data)) if int(data[i].get('Mes')) == 3]
+
+    #----------------- LISTA SUMA POR MES-------------------
+    ventas = ['Electrodomesticos', 'Alimentos', 'Bazar', 'Limpieza']
+    suma_mes1 = [sum(electrodomesticos), sum(alimentos), sum(bazar), sum(limpieza)]
+    suma_mes2 = [sum(electrodomesticos2), sum(alimentos2), sum(bazar2), sum(limpieza2)]
+    suma_mes3 = [sum(electrodomesticos3), sum(alimentos3), sum(bazar3), sum(limpieza3)]
+    
+    width = 0.2
+
+    fig = plt.figure()
+    fig.suptitle('"Total vendido a final de mes"', fontsize=16)
+
+    ax = fig.add_subplot(1, 3, 1)
+    ax = fig.add_subplot(1, 3, 2)
+    ax = fig.add_subplot(1, 3, 3)
+
+    ax.bar(ventas, suma_mes1, width=width, label='Primer mes')
+
+    
+
+
+
+    csvfile.close()
+    
 
 
 if __name__ == '__main__':
     print("Ejercicios de práctica")
-    ej1()
-    # ej2()
-    # ej3()
-    # ej4()
-    # ej5()
+    #ej1()
+    #ej2()
+    #ej3()
+    #ej4()
+    ej5()
