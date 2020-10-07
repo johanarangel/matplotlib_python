@@ -66,20 +66,20 @@ def ej1():
 
     ax1.plot(x, y1, color='black', label='y=x**2')
     ax1.set_facecolor('lavender')
-    ax1.set_xlabel('Valores de x')
-    ax1.set_ylabel('Potencia cuadrada de x')
+    ax1.set_xlabel('Eje x')
+    ax1.set_ylabel('Eje y')
     ax1.legend()
     
     ax2.plot(x, y2, color='red', label='y=x**3')
     ax2.set_facecolor('mintcream')
-    ax2.set_xlabel('Valores de x')
-    ax2.set_ylabel('Potencia cúbica de x')
+    ax2.set_xlabel('Eje x')
+    ax2.set_ylabel('Eje y')
     ax2.legend()
     
     ax3.plot(x, y3, color='green', label='y=x**4')
     ax3.set_facecolor('papayawhip')
-    ax3.set_xlabel('Valores de x')
-    ax3.set_ylabel('potencia cuarta de x')
+    ax3.set_xlabel('Eje x')
+    ax3.set_ylabel('Eje y')
     ax3.legend()
 
     plt.show()
@@ -151,11 +151,11 @@ def ej3():
     # Se debe colocar título al gráfico.
     # Se debe cambiar la grilla y el fondo a su elección.
 
-    fig = plt.figure()
+    fig = plt.figure('Uso de los lenguajes')
     fig.suptitle('"Uso de los lenguajes de programación"', fontsize=16)
     ax = fig.add_subplot()
    
-    ax.bar(lenguajes, performance, label='Lenguajes')
+    ax.bar(lenguajes, performance, label='Lenguajes', color='violet')
     ax.set_facecolor('lightyellow')
     ax.grid(ls='dashed')
     ax.set_xlabel('Lenguajes de programación')
@@ -181,7 +181,7 @@ def ej4():
     # Se debe colocar un título al gráfico
 
     
-    fig = plt.figure()
+    fig = plt.figure('Gráfico Pie')
     fig.suptitle('"Uso de los lenguajes de programación"', fontsize=16)
     ax = fig.add_subplot()
 
