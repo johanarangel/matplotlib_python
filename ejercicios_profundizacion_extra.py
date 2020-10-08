@@ -272,7 +272,21 @@ def venta(categoria, mes):
             return [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
             
 
-    csvfile.close()
+    csvfile.close()  # Inove: No es necesario cerrar el archivo porque el "with" lo cerra automaticamente
+
+# Inove: Realmente no son necesarios los condicionales en esta funcion, ya que el "get" buscará por la categoría
+# ingresada directamente en el diccionario --> int(data[i].get(categoria)) 
+# En la función implementada arriba se utiliza los condicionales pero la línea de código que se invoca es siempre
+# exactamente igual:
+# [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
+# Para lo que podría aprovecharse los condicionales es por si se ingresó una categoría equivocada, pero como en este
+# caso las categorías están definidas y no se ingresan a mano o por consola no es necesario ese chequeo.
+def venta_inove(categoria, mes):
+    
+    with open('ventas.csv') as csvfile:
+        data = list(csv.DictReader(csvfile))
+    
+    return [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
     
 
 def ej5():
@@ -304,7 +318,7 @@ def ej5():
         
     alimentos = venta(categoria='Alimentos', mes= 1)
         
-    bazar = venta(categoria='Alimentos', mes= 1)
+    bazar = venta(categoria='Alimentos', mes= 1)  # Inove: Ojo! La categoría debería ser "Bazar"
 
     limpieza = venta(categoria='Limpieza', mes= 1)
     
@@ -314,7 +328,7 @@ def ej5():
         
     alimentos2 = venta(categoria='Alimentos', mes= 2)
         
-    bazar2 = venta(categoria='Alimentos', mes= 2)
+    bazar2 = venta(categoria='Alimentos', mes= 2)  # Inove: Ojo! La categoría debería ser "Bazar"
 
     limpieza2 = venta(categoria='Limpieza', mes= 2)
     #----------------- LISTA TERCER MES-------------------
@@ -323,7 +337,7 @@ def ej5():
         
     alimentos3 = venta(categoria='Alimentos', mes= 3)
         
-    bazar3 = venta(categoria='Alimentos', mes= 3)
+    bazar3 = venta(categoria='Alimentos', mes= 3)  # Inove: Ojo! La categoría debería ser "Bazar"
 
     limpieza3 = venta(categoria='Limpieza', mes= 3)
 
