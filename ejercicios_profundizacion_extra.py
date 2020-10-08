@@ -122,7 +122,6 @@ def ej1():
 
     plt.show()
 
-    csvfile.close()
     
 def ej2():
     print('Comenzamos a ponernos serios!')
@@ -169,8 +168,7 @@ def ej2():
     ax.legend()
 
     plt.show()
-    csvfile.close()
-  
+      
 def ej3():
     print("Buscando la tendencia")
 
@@ -205,9 +203,7 @@ def ej3():
 
     plt.show()
 
-    csvfile.close()
-
-
+   
 def ej4():
     print("Exprimiendo los datos")
 
@@ -252,28 +248,15 @@ def ej4():
     ax.axis('equal')
 
     plt.show()
-    csvfile.close()
-
+    
 def venta(categoria, mes):
     
     with open('ventas.csv') as csvfile:
         data = list(csv.DictReader(csvfile))
     
-        if categoria == 'Electrodomesticos':
-            return [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
-            
-        elif categoria == 'Alimentos':
-            return [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
-           
-        elif categoria == 'Bazar':
-            return [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
-           
-        elif categoria == 'Limpieza':
-            return [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
-            
-
-    csvfile.close()
-    
+        return [int(data[i].get(categoria)) for i in range(len(data)) if int(data[i].get('Mes')) == mes]
+       
+                
 
 def ej5():
     print("Ahora sí! buena suerte :)")
@@ -304,7 +287,7 @@ def ej5():
         
     alimentos = venta(categoria='Alimentos', mes= 1)
         
-    bazar = venta(categoria='Alimentos', mes= 1)
+    bazar = venta(categoria='Bazar', mes= 1)
 
     limpieza = venta(categoria='Limpieza', mes= 1)
     
@@ -314,7 +297,7 @@ def ej5():
         
     alimentos2 = venta(categoria='Alimentos', mes= 2)
         
-    bazar2 = venta(categoria='Alimentos', mes= 2)
+    bazar2 = venta(categoria='Bazar', mes= 2)
 
     limpieza2 = venta(categoria='Limpieza', mes= 2)
     #----------------- LISTA TERCER MES-------------------
@@ -323,7 +306,7 @@ def ej5():
         
     alimentos3 = venta(categoria='Alimentos', mes= 3)
         
-    bazar3 = venta(categoria='Alimentos', mes= 3)
+    bazar3 = venta(categoria='Bazar', mes= 3)
 
     limpieza3 = venta(categoria='Limpieza', mes= 3)
 
